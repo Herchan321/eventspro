@@ -2,8 +2,16 @@ import './singlepage.scss';
 import Slider from "../../components/slider/slider";
 import { singlePostData, userData } from "../../lib/data";
 import Map from "../../components/map/map";
+import Rating from '../../components/rating/rating'; 
+import { useState } from 'react';
 
 function SinglePage() {
+  const [userRating, setUserRating] = useState(0); 
+
+  const handleRatingChange = (newRating) => {
+    setUserRating(newRating); // Met à jour la note de l'utilisateur
+  };
+
   return (
     <div className='singlePage'>
       {/* Section Détails */}
@@ -38,6 +46,15 @@ function SinglePage() {
               <p>{singlePostData.experience}</p>
               <p>{singlePostData.description}</p>
             </div>
+
+            {/* Système de Notation */}
+            <div className="user-rating">
+              <h3>Votre Note</h3>
+              <Rating 
+                rating={userRating} 
+                onRatingChange={handleRatingChange} 
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -65,7 +82,7 @@ function SinglePage() {
                 {userData.badge && (
                   <img 
                     src={`/${userData.badge.toLowerCase()}.png`} 
-                    alt="User Badge" 
+                    alt="" 
                     className="badge"
                   />
                 )}
@@ -78,11 +95,11 @@ function SinglePage() {
           <p className="title">Contact</p>
           <div className="listVertical">
             <div className="feature">
-              <img src="/phone.png" alt="Phone Icon" />
+              <img src="/phone.png" alt="phone" />
               <p>{singlePostData.contact.phone}</p>
             </div>
             <div className="feature">
-              <img src="/email.png" alt="Email Icon" />
+              <img src="/email.png" alt="Email" />
               <p>{singlePostData.contact.email}</p>
             </div>
           </div>
@@ -97,11 +114,11 @@ function SinglePage() {
           <div className="buttons">
             <button>
               <img src="/chat.png" alt="Chat Icon" />
-              Envoyer un message
+              Me contacter
             </button>
             <button>
               <img src="/save.png" alt="Save Icon" />
-              Sauvegarder l'endroit
+              Sauvegarder 
             </button>
           </div>
         </div>

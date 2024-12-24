@@ -19,9 +19,9 @@ const SearchBar = ({ onSearch }) => {
             </select>
             <select value={location} onChange={(e) => setLocation(e.target.value)}>
                 <option value="">Localisation</option>
-                <option value="paris">Paris</option>
-                <option value="lyon">Lyon</option>
-                <option value="marseille">Marseille</option>
+                <option value="rabat">Rabat</option>
+                <option value="casa">Casa</option>
+                <option value="marrakech">Marrakech</option>
                 {/* Ajoutez d'autres localisations ici */}
             </select>
             <button onClick={handleSearch}>Recherche</button>

@@ -21,7 +21,7 @@ const Footer = () => {
           <a href="/contact">Contact</a>
           <a href="/privacy-policy">Privacy Policy</a>
         </div>
-        <p className="footer-text">&copy; 2024 YourCompanyName. All rights reserved.</p>
+        <p className="footer-text">&copy; 2024 EventsPro. All rights reserved.</p>
       </div>
     </footer>
   );

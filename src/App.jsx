@@ -8,8 +8,8 @@ import Blog from "./components/blog/blog";
 import ListPage from "./routes/list/list";
 import  RegisterPage from './components/choix/choix';
 import SinglePage from "./routes/singlepage/singlepage";
-import Profile from "./profile/profile";
-import Feedbacks from "./feedback/feedback";
+import Profile from "./routes/profile/profile";
+import Feedbacks from "./components/feedback/feedback";
 import Footer from "./components/footer/footer";
 import BlogPost from "./routes/blogpost/blogpost";
 
@@ -23,9 +23,10 @@ function App() {
         <Route path="/choix" element={<RegisterPage />} />
         <Route path="/details/:id" element={<SinglePage/>} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/blog" element={<BlogPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/service/:id" element={< SinglePage/>} />
+        <Route path="/blog" element={<Blog/>} />
 
-        
       </Routes>
     </Router>
   );

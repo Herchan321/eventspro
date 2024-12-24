@@ -5,18 +5,18 @@ const Feedbacks = () => {
   const [feedbacks, setFeedbacks] = useState([
     {
       id: 1,
-      name: 'John Doe',
-      description: 'A terrific piece of praise',
+      name: 'Asma',
+      description: 'great services',
     },
     {
       id: 2,
-      name: 'Jane Smith',
-      description: 'A fantastic bit of feedback',
+      name: 'oumaima',
+      description: 'great services',
     },
     {
       id: 3,
-      name: 'Alice Brown',
-      description: 'A genuinely glowing review',
+      name: 'Adrae',
+      description: 'great services',
     },
   ]);
 

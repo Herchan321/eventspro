@@ -11,15 +11,14 @@ const Blog = () => {
     },
     {
       id: 2,
-      title: "comment rendre l'aniversaire de ton enfant inoubliable",
+      title: "Comment rendre l'anniversaire de ton enfant inoubliable",
       image: "aniver.png",
     },
     {
       id: 3,
-      title: "choisir la neilleure pour voyte evenemet",
+      title: "Choisir la meilleure salle pour votre événement",
       image: "beaa1054-salle_fetes.jpg",
     },
-    
   ];
 
   return (

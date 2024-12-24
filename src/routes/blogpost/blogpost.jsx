@@ -4,7 +4,7 @@ import './blogpost.scss';
 const BlogPost = () => {
   return (
     <div className="blog-post">
-      <h1>Un beau mariage dans un cadre enchanteur</h1>
+      <h1>Un beau mariage </h1>
       <div className="post-meta">
         <p className="author">Par Auteur</p>
         <p className="date">Publié le 15 décembre 2024</p>
@@ -15,15 +15,15 @@ const BlogPost = () => {
           Un mariage est un moment unique dans la vie de chacun, et ce mariage ne fait pas exception. Dans un cadre
           enchanteur, entouré d'amis et de famille, les mariés ont échangé leurs vœux, et la magie a opéré.
         </p>
-        <img src="image.png" alt="Échange des vœux" className="main-image" />
+        <img src="/i.png" alt="" className="main-image" />
         
         <p>
           Le cadre était parfait, la décoration sublime et l'atmosphère magique. Chaque détail était pensé pour rendre
           ce moment inoubliable.
         </p>
         <div className="image-gallery">
-          <img src="images.jpg" alt="Lieu de réception" className="gallery-image" />
-          <img src="images.jpg" alt="Ambiance de la fête" className="gallery-image" />
+          <img src="/images.jpg" alt="Lieu de réception" className="gallery-image" />
+          <img src="/m.jpg" alt="Ambiance de la fête" className="gallery-image" />
         </div>
         
         <p>
@@ -35,11 +35,11 @@ const BlogPost = () => {
       <div className="related-posts">
         <h3>Articles connexes</h3>
         <div className="related-item">
-          <img src="traiteur2.jpg" alt="Article Connexe 1" />
+          <img src="/traiteur2.jpg" alt="Article Connexe 1" />
           <p>Les tendances des mariages en 2024</p>
         </div>
         <div className="related-item">
-          <img src="Soutenance.jpg" alt="Article Connexe 2" />
+          <img src="/Mariage-marocain-1536x864.webp" alt="Article Connexe 2" />
           <p>Comment choisir le lieu parfait pour votre mariage</p>
         </div>
       </div>

@@ -9,14 +9,13 @@ const Map = () => {
     <MapContainer
       center={position}
       zoom={13}
-      style={{ height: "500px", width: "100%" }} // Taille de la carte
+      style={{ height: "450px", width: "100%" }} // Taille de la carte
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <Marker position={position}>
-        <Popup>Un exemple de popup avec React-Leaflet</Popup>
       </Marker>
     </MapContainer>
   );
