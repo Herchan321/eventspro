@@ -9,7 +9,7 @@ function SinglePage() {
   const [userRating, setUserRating] = useState(0); 
 
   const handleRatingChange = (newRating) => {
-    setUserRating(newRating); // Met à jour la note de l'utilisateur
+    setUserRating(newRating); 
   };
 
   return (
