@@ -1,0 +1,58 @@
+$primary-color: #4a90e2;
+$button-color: #000; // Couleur des boutons noirs
+$secondary-color: #f5f5f5;
+$border-radius: 8px;
+
+.filter-container {
+    background-color: $secondary-color;
+    padding: 10px;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center; // Aligner tous les éléments au centre
+    justify-content: space-between; // Espacement entre les éléments
+    flex-wrap: nowrap; // Pas de retour à la ligne
+
+    .input-group, .service-group, .button-group {
+        display: flex;
+        align-items: center; // Aligner les éléments au centre
+        margin-right: 20px; // Espacement à droite
+    }
+
+    label {
+        margin-right: 5px; // Espacement à droite du label
+        font-weight: bold;
+        color: #333;
+    }
+
+    input, select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: $border-radius;
+        transition: border-color 0.3s;
+        margin-right: 10px; // Espacement entre les inputs
+
+        &:focus {
+            border-color: $primary-color;
+            outline: none;
+        }
+    }
+
+    .button-group {
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: $border-radius;
+            cursor: pointer;
+            color: white; // Texte en blanc
+            background-color: $button-color; // Couleur de fond noir
+            transition: background-color 0.3s;
+            font-weight: bold;
+            margin-left: 10px; // Espacement entre les boutons
+
+            &:hover {
+                background-color: darken($button-color, 10%); // Assombrir au survol
+            }
+        }
+    }
+}

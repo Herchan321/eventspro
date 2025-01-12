@@ -1,0 +1,25 @@
+.listPage {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .resultsContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+  
+  .cardsContainer {
+    display: flex;
+    flex-direction: column; // Aligne les cartes verticalement
+    gap: 20px; // Espace entre les cartes
+  }
+  
+  .mapContainer {
+    flex: 0 0 450px; // Largeur fixe pour la carte
+    background: #eaeaea; // Couleur de fond pour la carte
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }

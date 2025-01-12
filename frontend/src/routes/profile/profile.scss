@@ -1,0 +1,48 @@
+$primary-color: #1a1616;
+$button-color: #000;
+$border-radius: 8px;
+$card-background: #ac8888;
+
+.profile-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+
+    h1, h2 {
+        color: $primary-color;
+    }
+
+    .user-data {
+        background-color: $card-background;
+        padding: 20px;
+        border-radius: $border-radius;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+
+        p {
+            margin: 5px 0;
+        }
+        
+        button {
+            background-color: $button-color;
+            color: white;
+            border: none;
+            border-radius: $border-radius;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+
+            &:hover {
+                background-color: darken($button-color, 10%);
+            }
+        }
+    }
+
+    .savedPostsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; // Espacement entre les cartes
+    }
+}
