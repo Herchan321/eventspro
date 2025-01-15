@@ -1,32 +1,12 @@
-import mongoose from 'mongoose';
-
-const clientSchema = new mongoose.Schema({
-    nom: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    adresse: {
-        type: String,
-        required: true
-    },
-    ville: {
-        type: String,
-        required: true
-    },
-    
-}, {
-    timestamps: true
-});
-
-const Client = mongoose.model('Client', clientSchema);
+class Client {
+    constructor(data) {
+        this.id_client = data.id_client;
+        this.nom = data.nom;
+        this.email = data.email;
+        this.password = data.password;
+        this.created_at = data.created_at;
+        this.updated_at = data.updated_at;
+    }
+}
 
 export { Client };

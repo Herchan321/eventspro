@@ -1,18 +1,11 @@
-import mongoose from 'mongoose';
-
-const categorieServiceSchema = new mongoose.Schema({
-    nom: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
+class CategorieService {
+    constructor(data) {
+        this.id_categorie = data.id_categorie;
+        this.nom = data.nom;
+        this.description = data.description;
+        this.created_at = data.created_at;
+        this.updated_at = data.updated_at;
     }
-}, {
-    timestamps: true
-});
-
-const CategorieService = mongoose.model('CategorieService', categorieServiceSchema);
+}
 
 export { CategorieService };

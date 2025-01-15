@@ -1,20 +1,23 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "type": "module",
   "main": "app.js",
   "description": "",
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev": "concurrently \"vite\" \"nodemon app.js\"",
-    "build": "vite build",
-    "serve": "vite preview"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "node testConnection.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.13",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongodb": "^6.12.0",
-    "mongoose": "^8.9.4"
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",

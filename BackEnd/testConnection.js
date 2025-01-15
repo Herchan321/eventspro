@@ -1,13 +1,15 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
+import { supabase } from './config/supabase.js';
 
-console.log('DB_URI:', process.env.DB_URI); // Vérifiez si DB_URI est chargé correctement
+async function testConnection() {
+    try {
+        const { data, error } = await supabase.from('clients').select('*').limit(1);
+        if (error) throw error;
+        console.log('Connected to Supabase successfully');
+        console.log('Test query result:', data);
+    } catch (err) {
+        console.error('Connection error:', err.message);
+        process.exit(1);
+    }
+}
 
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log('MongoDB connecté');
-        mongoose.disconnect(); // Déconnecter après le test
-    })
-    .catch(err => {
-        console.error('Erreur de connexion MongoDB:', err);
-    });
+testConnection();

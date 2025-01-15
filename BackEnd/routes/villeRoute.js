@@ -9,10 +9,10 @@ import {
 
 const router = express.Router();
 
-router.get('/villes', getVilles);
-router.get('/villes/:id', getVilleById);
-router.post('/villes', createVille);
-router.put('/villes/:id', updateVille);
-router.delete('/villes/:id', deleteVille);
+router.get('/', getVilles);
+router.get('/:id', getVilleById);
+router.post('/', createVille);
+router.put('/:id', updateVille);
+router.delete('/:id', deleteVille);
 
 export default router;

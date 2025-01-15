@@ -1,10 +1,16 @@
+import { supabase } from '../config/supabase.js';
 import { Client } from '../models/Client.js';
 import bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export const getClients = async (req, res) => {
     try {
-        const clients = await Client.find().select('-password');
-        res.status(200).json(clients);
+        const { data, error } = await supabase
+            .from('clients')
+            .select('id_client, nom, email, created_at, updated_at');
+        if (error) throw error;
+        res.status(200).json(data.map(client => new Client(client)));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -12,9 +18,14 @@ export const getClients = async (req, res) => {
 
 export const getClientById = async (req, res) => {
     try {
-        const client = await Client.findById(req.params.id).select('-password');
-        if (!client) return res.status(404).json({ message: 'Client non trouvé' });
-        res.status(200).json(client);
+        const { data, error } = await supabase
+            .from('clients')
+            .select('id_client, nom, email, created_at, updated_at')
+            .eq('id', req.params.id)
+            .single();
+        if (error) throw error;
+        if (!data) return res.status(404).json({ message: 'Client non trouvé' });
+        res.status(200).json(new Client(data));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -22,30 +33,14 @@ export const getClientById = async (req, res) => {
 
 export const createClient = async (req, res) => {
     try {
-        const { nom, email, password, adresse, ville } = req.body;
-        
-        // Vérifier si l'email existe déjà
-        const existingClient = await Client.findOne({ email });
-        if (existingClient) {
-            return res.status(400).json({ message: 'Cet email est déjà utilisé' });
-        }
-
-        // Hash du mot de passe
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const client = await Client.create({
-            nom,
-            email,
-            password: hashedPassword,
-            adresse,
-            ville
-        });
-
-        // Exclure le mot de passe de la réponse
-        const clientResponse = client.toObject();
-        delete clientResponse.password;
-
-        res.status(201).json(clientResponse);
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const newClientId = uuidv4();
+        const { data, error } = await supabase
+            .from('clients')
+            .insert([{id_client: newClientId,...req.body, password: hashedPassword }])
+            .select();
+        if (error) throw error;
+        res.status(201).json(new Client(data[0]));
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -53,21 +48,17 @@ export const createClient = async (req, res) => {
 
 export const updateClient = async (req, res) => {
     try {
-        const { password, ...updateData } = req.body;
-
-        // Si un nouveau mot de passe est fourni, le hasher
-        if (password) {
-            updateData.password = await bcrypt.hash(password, 10);
+        const updateData = { ...req.body };
+        if (updateData.password) {
+            updateData.password = await bcrypt.hash(updateData.password, 10);
         }
-
-        const client = await Client.findByIdAndUpdate(
-            req.params.id,
-            updateData,
-            { new: true }
-        ).select('-password');
-
-        if (!client) return res.status(404).json({ message: 'Client non trouvé' });
-        res.status(200).json(client);
+        const { data, error } = await supabase
+            .from('clients')
+            .update(updateData)
+            .eq('id_client', req.params.id)
+            .select();
+        if (error) throw error;
+        res.status(200).json(new Client(data[0]));
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -75,8 +66,11 @@ export const updateClient = async (req, res) => {
 
 export const deleteClient = async (req, res) => {
     try {
-        const client = await Client.findByIdAndDelete(req.params.id);
-        if (!client) return res.status(404).json({ message: 'Client non trouvé' });
+        const { error } = await supabase
+            .from('clients')
+            .delete()
+            .eq('id_client', req.params.id);
+        if (error) throw error;
         res.status(200).json({ message: 'Client supprimé avec succès' });
     } catch (error) {
         res.status(500).json({ message: error.message });

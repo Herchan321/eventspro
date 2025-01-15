@@ -9,10 +9,10 @@ import {
 
 const router = express.Router();
 
-router.get('/prestataires', getPrestataires);
-router.get('/prestataires/:id', getPrestataireById);
-router.post('/prestataires', createPrestataire);
-router.put('/prestataires/:id', updatePrestataire);
-router.delete('/prestataires/:id', deletePrestataire);
+router.get('/', getPrestataires);
+router.get('/:id', getPrestataireById);
+router.post('/', createPrestataire);
+router.put('/:id', updatePrestataire);
+router.delete('/:id', deletePrestataire);
 
 export default router;

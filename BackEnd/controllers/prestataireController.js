@@ -1,10 +1,15 @@
+import { supabase } from '../config/supabase.js';
 import { Prestataire } from '../models/Prestataire.js';
 import bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
 
 export const getPrestataires = async (req, res) => {
     try {
-        const prestataires = await Prestataire.find().populate('user');
-        res.status(200).json(prestataires);
+        const { data, error } = await supabase
+            .from('prestataires')
+            .select('*');
+        if (error) throw error;
+        res.status(200).json(data.map(p => new Prestataire(p)));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -12,9 +17,14 @@ export const getPrestataires = async (req, res) => {
 
 export const getPrestataireById = async (req, res) => {
     try {
-        const prestataire = await Prestataire.findById(req.params.id).populate('user');
-        if (!prestataire) return res.status(404).json({ message: 'Prestataire non trouvé' });
-        res.status(200).json(prestataire);
+        const { data, error } = await supabase
+            .from('prestataires')
+            .select('*')
+            .eq('id_prstataire', req.params.id)
+            .single();
+        if (error) throw error;
+        if (!data) return res.status(404).json({ message: 'Prestataire non trouvé' });
+        res.status(200).json(new Prestataire(data));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -23,11 +33,13 @@ export const getPrestataireById = async (req, res) => {
 export const createPrestataire = async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        const prestataire = await Prestataire.create({
-            ...req.body,
-            password: hashedPassword
-        });
-        res.status(201).json(prestataire);
+        const newPrestataireId = uuidv4();
+        const { data, error } = await supabase
+            .from('prestataires')
+            .insert([{id_pretataire:newPrestataireId ,...req.body, password: hashedPassword }])
+            .select();
+        if (error) throw error;
+        res.status(201).json(new Prestataire(data[0]));
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -35,13 +47,17 @@ export const createPrestataire = async (req, res) => {
 
 export const updatePrestataire = async (req, res) => {
     try {
-        const prestataire = await Prestataire.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
-        if (!prestataire) return res.status(404).json({ message: 'Prestataire non trouvé' });
-        res.status(200).json(prestataire);
+        const updateData = { ...req.body };
+        if (updateData.password) {
+            updateData.password = await bcrypt.hash(updateData.password, 10);
+        }
+        const { data, error } = await supabase
+            .from('prestataires')
+            .update(updateData)
+            .eq('id_prestataire', req.params.id)
+            .select();
+        if (error) throw error;
+        res.status(200).json(new Prestataire(data[0]));
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -49,8 +65,11 @@ export const updatePrestataire = async (req, res) => {
 
 export const deletePrestataire = async (req, res) => {
     try {
-        const prestataire = await Prestataire.findByIdAndDelete(req.params.id);
-        if (!prestataire) return res.status(404).json({ message: 'Prestataire non trouvé' });
+        const { error } = await supabase
+            .from('prestataires')
+            .delete()
+            .eq('id_prestataire', req.params.id);
+        if (error) throw error;
         res.status(200).json({ message: 'Prestataire supprimé avec succès' });
     } catch (error) {
         res.status(500).json({ message: error.message });

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { supabase } from '../../supabaseClient';
 import { servicesData } from '../../lib/data';
 import './list.scss';
 import Map from '../../components/map/map';
